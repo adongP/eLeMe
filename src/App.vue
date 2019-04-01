@@ -15,15 +15,12 @@
       </div>
 
     </div>
-    <router-view></router-view>
+    <router-view :seller="seller"></router-view>
   </div>
 </template>
 
 <script>
 import header from './components/header/header';
-// import goods from './components/goods/goods';
-// import ratings from './components/ratings/ratings';
-// import seller from './components/seller/seller';
 const ERR_OK = 0;
 export default {
   data() {
@@ -44,9 +41,6 @@ export default {
   },
   components: {
     'v-header': header
-    // 'v-goods': goods,
-    // 'v-ratings': ratings,
-    // 'v-seller': seller
   }
 };
 </script>
