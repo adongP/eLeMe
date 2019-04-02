@@ -50,10 +50,26 @@ export default {
     },
     data() {
         return {
-            goods: {},
+            goods: [],
             listHeight: [],
             scrollY: 0
         };
+    },
+    created() {
+        this.$http.get('/api/goods').then(res => {
+            console.log(res.body);
+            res = res.body;
+            if (res.errno === ERR_OK) {
+                this.goods = res.data;
+                console.log(this.goods);
+                this.$nextTick(() => {
+                    this._initscroll();
+                    this._calculateHeight();
+                });
+            }
+            console.log(this.goods);
+        });
+        this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
     },
     computed: {
         currentIndex() {
@@ -79,22 +95,6 @@ export default {
                 return foods;
             };
         }
-    },
-    created() {
-        this.$http.get('/api/goods').then(res => {
-            console.log(res.body);
-            res = res.body;
-            if (res.errno === ERR_OK) {
-                this.goods = res.data;
-                console.log(this.goods);
-                this.$nextTick(() => {
-                    this._initscroll();
-                    this._calculateHeight();
-                });
-            }
-            console.log(this.goods);
-        });
-        this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
     },
     methods: {
         _initscroll() {
@@ -142,6 +142,7 @@ export default {
     events: {
         'cart.add'(target) {
             this._drop(target);
+            console.log(target);
         }
     }
 };
