@@ -67,15 +67,17 @@ export default {
             return 0;
         },
         selectFoods() {
-            var foods = [];
-            this.goods.forEach(good => {
-                good.foods.forEach((food) => {
-                    if (food.count) {
-                        foods.push(food);
-                    }
+            if (this.goods) {
+                var foods = [];
+                this.goods.forEach(good => {
+                    good.foods.forEach((food) => {
+                        if (food.count) {
+                            foods.push(food);
+                        }
+                    });
                 });
-            });
-            return foods;
+                return foods;
+            };
         }
     },
     created() {
